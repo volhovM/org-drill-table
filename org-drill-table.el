@@ -197,13 +197,13 @@ and the row value."
                     (content (save-restriction
                                (org-narrow-to-subtree)
                                (org-drill-table--skip-props-and-schedule)
-                               (->> (buffer-substring (point) (point-max))
-                                 (s-split "\n")
-                                 (-drop 1)
-                                 (mapcar 's-trim)
-                                 (s-join "\n")
-                                 s-trim
-                                 message))))
+                               (->> (buffer-substring-no-properties (point) (point-max))
+                                    (s-split "\n")
+                                    (-drop 1)
+                                    (mapcar 's-trim)
+                                    (s-join "\n")
+                                    s-trim
+                                    message))))
                 (setq acc (cons (cons hd content) acc))))
 
             (OrgDrillCard heading type instructions (nreverse acc))))))))
